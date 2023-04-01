@@ -7,18 +7,8 @@ output:
 pdf_document: default
 html_document: default
 ---
-  
-  > "Our offense is like the Pythagorean Theorem. There is no answer!", _Shaquille O'Neal_
-
-
-## The Background
-
-Your role for the midterm project is that of data analyst intern at an NBA (professional basketball) team. Your direct supervisor (also part of the analytics team) has asked you to create a data visualization to illustrate how (or if) the team's shots have changed over time. After some initial clarifying questions, your supervisor confessed that they had seen some pretty cool shot charts at http://savvastjortjoglou.com/nba-shot-sharts.html and would like to extend the ideas a bit. 
-
-Your data for the midterm project may come from a variety of sources, including the NBA directly, as well as Basketball-Reference, HoopsHype, and others. There are several ways to access the data, but perhaps the simplest is through the `nbastatR` package, which serves as a wrapper (or set of helper functions) for these various data sources. There is a lot of potentially useful information that can be found using this package; unfortunately, the documentation is somewhat inconsistent. For example, the documentation at https://www.rdocumentation.org/packages/nbastatR/versions/0.1.110202031 is pretty well-formatted and easy to navigate, but the current function names have changed a bit (see `?nbastatR` and click "Index"). (If you use the nbastatR package, you'll want to install the package using the following code. There are other packages with this type of data, though.)
-
 ```
-
+#Reuquired Packages
 library(devtools)
 devtools::install_github("abresler/nbastatR")
 ```
@@ -59,23 +49,7 @@ library(usethis)
 
 ```
 
-
-
-## The Tasks
-
-1. (30 points) Produce a graphic displaying the shot locations for a particular team over several years. Some notes:
-
-   - Colors should be chosen to reflect the team, if possible.
-   - There are likely many overlaid points -- handle this by either binning these by location, or use opacity.
-   - Incorporate information about whether the shot was made or not (shape, color, etc.).
-   - The graphic should be well-labeled, titled, etc.
-   - Start with a graph for a single year, then extend to several years. Up to 20 years of shot data is available. Either facet these by year or animate using the years.
-   - You'll want to figure out what the coordinates mean somehow. This might be through the documentation, but could also be determined using aspects of the data itself and the dimensions of an NBA court.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           - If possible, try to put a basketball court on the background of the image (you'll need to scale it appropriately).
-
-  
-    
-    
+1.   
 ```{r fig.height=30, fig.width=10}
 data_maker <- function(x,y,z){
 for (i in x:y){
@@ -115,72 +89,39 @@ ggplot(data_01_22, aes(x = locationY/9, y = locationX/10.5)) +
 ```
 
 
-2. (30 points) Summarize the graphic/series of graphics into a digestible, bullet-point brief report for front-office staff. Some notes:
-
-
+2.
 Main Takeaways:
-
 -Plot of Washington Wizards attempted shots separated by season 
-
 - Contour lines represent how the density of the total attempted shots, including assists is distributed
-
 - Blue heat map shows areas where shots were attempted but were unsuccessful
-
 - White dots show successful shot locations
-
 - Seasons 2001-02 to 2002-03: Majority of shots not in the restricted zone taken in short corners in 4 distinct regions
-
 - Seasons 2003-04 to 2004-05: Majority of shots not in the restricted zone taken in short corners, more three-point shots attempted than in prior years
-
-- Seasons 2005-06-2007-08: Majority of shots not in the restricted zone are spread across the court within the three point boundary and outside of the free-throw line, more shots taken outside the three-point line 
-
-- Seasons 2008-09 to 2010-11: Euro-stepping legalized, shots within the restricted spread further from the hoop, similar shots within the three point line, far fewer shots taken beyond the three point line
-
+- Seasons 2005-06-2007-08: Majority of shots not in the restricted zone are spread across the court within the three-point boundary and outside of the free-throw line, more shots taken outside the three-point line 
+- Seasons 2008-09 to 2010-11: Euro-stepping legalized, shots within the restricted spread further from the hoop, similar shots within the three-point line, far fewer shots taken beyond the three-point line
 - Season 2011-12: Far fewer shots taken outside of the restricted zone
-
-- Seasons 2012-13 to 2013-14: Majority of shots shots not in the restricted zone taken at the high post, high density of three point shot in two very dense regions in the wing
-
--In the 2014-15 season, a large number of shots were taken near the high post in the short corner with an especially high success/miss rate near the baseline,
-
--From the 2015-16 to 2016-17 season, shots were spread out within the three point boundary.
-
--From 2018-19 to 2021-22, the majority of shots taken outside the restricted zone were attempted beyond the three point boundary.
+- Seasons 2012-13 to 2013-14: Majority of shots not in the restricted zone taken at the high post, high density of three point shot in two very dense regions in the wing
+-In the 2014-15 season, many shots were taken near the high post in the short corner with an especially high success/miss rate near the baseline,
+-From the 2015-16 to 2016-17 season, shots were spread out within the three-point boundary.
+-From 2018-19 to 2021-22, most shots taken outside the restricted zone were attempted beyond the three-point boundary.
 
 
-
-
-More Detailed Analysis
+A More Detailed Analysis
 -Each plot depicts the location of all shots attempted during that season by the Washington Wizards.
-
 -The contour lines indicate the overall density of attempted shots, including assists, the blue heat map depicts the areas where unsuccessful shots were attempted, and the white dots indicate the location of each successful shot taken that season.
-
--The majority of shots and assists were attempted within the restricted area which is a radius of 4 feet located around the basket.
-
-2001-02 to 2002-03: Of those shots not taken in the restricted zone, the majority were distributed in the short corners in 4 high density regions rather than throughout the length of the block.  A  very low number of shots were attempted beyond the three-point line in the three-point range.
-
-2003-04 to 2004-05: Of shots not in the restricted zone the majority were in the short corners, but spread throughout the length of the block/  More three-point shots were attempted than in prior years specifically in two very dense regions in the Wing.
-
-2005-06-2007-08: Of shots not in the restricted zone, the majority are spread across the court within the three point boundary and outside of the free-throw lane, more shots are being taken outside the three-point line especially concentrated in the two "Wing" zones.
-
-2008-09 to 2010-11: Euro-stepping introduced as a legal move and successful shots in the restricted zone can be seen to spread further from the hoop.  Apart from the restricted zone, these years display similar shot patterns within the three point line as prior years but with far fewer shots taken beyond the three point line. 
-
+-Most shots and assists were attempted within the restricted area which is a radius of 4 feet located around the basket.
+2001-02 to 2002-03: Of those shots not taken in the restricted zone, the majority were distributed in the short corners in 4 high density regions rather than throughout the length of the block.  A very low number of shots were attempted beyond the three-point line in the three-point range.
+2003-04 to 2004-05: Of shots not in the restricted zone the majority were in the short corners but spread throughout the length of the block/ More three-point shots were attempted than in prior years specifically in two very dense regions in the Wing.
+2005-06-2007-08: Of shots not in the restricted zone, the majority are spread across the court within the three-point boundary and outside of the free-throw lane, more shots are being taken outside the three-point line especially concentrated in the two "Wing" zones.
+2008-09 to 2010-11: Euro-stepping introduced as a legal move and successful shots in the restricted zone can be seen to spread further from the hoop.  Apart from the restricted zone, these years display similar shot patterns within the three-point line as prior years but with far fewer shots taken beyond the three-point line. 
 2011-12: Far fewer shots taken outside of the restricted zone, and far fewer shots taken in total.
-
-2012-13 to 2013-14: The majority of shots shots not in the restricted zone are taken at the high post, there is a high density of three point shot shots taken in the corners.
-
-2014-15: Shots taken within the three point boundary are concentrated in the high post, and there is a large amount of high successful/missed ratio shots in the short corner near the baseline.
-
-2015-16 to 2016-17: Within the three point boundary shots are spread throughout, a higher number of shots are being attempted outwards beyond the the three point boundary 
-
-2018-19 to 2021-22: The majority of shots taken outside the restricted zone are now attempted outwards beyond the the three point boundary. The change in the shot-attempt-location distribution over the years could be evidence that: players are becoming more effective at making three-point shots, the penalty for missing shots is smaller now than in the early 2000s, the defensive abilities of opposing teams is improving forcing shots to be attempted further out, the defensive capabilities of  opposing teams are insufficient and non-three-point shot attempts are able to reach the restricted zone.
+2012-13 to 2013-14: Most shots not in the restricted zone are taken at the high post, there is a high density of three point shot shots taken in the corners.
+2014-15: Shots taken within the three-point boundary are concentrated in the high post, and there is a large amount of high successful/missed ratio shots in the short corner near the baseline.
+2015-16 to 2016-17: Within the three-point boundary shots are spread throughout, a higher number of shots are being attempted outwards beyond the three-point boundary. 
+2018-19 to 2021-22: Most shots taken outside the restricted zone are now attempted outwards beyond the three-point boundary. The change in the shot-attempt-location distribution over the years could be evidence that: players are becoming more effective at making three-point shots, the penalty for missing shots is smaller now than in the early 2000s, the defensive abilities of opposing teams is improving forcing shots to be attempted further out, the defensive capabilities of  opposing teams are insufficient and non-three-point shot attempts are able to reach the restricted zone. 
 
 
-3. (30 points) Write and document clean, efficient, reproducible code. Some notes:
-
-   - This code will be viewed by your direct supervisor.
-   - The code file should include your code to gather, join, and clean the data; the code to generate the graphic(s) presented; and your commentary on the results (so, a single .rmd file, or an .rmd file that sources an .r file).
-   - Your code should be clean, organized, and reproducible. Remove unnecessary/scratch/exploratory code.
-   - Your code should be well commented. In particular, any decisions or judgement calls made in the analysis process should be explained/justified. Sections of code should be identified even if not functionalized (including purpose, data/argument inputs, analysis outputs).
+3.
 ```{r}
 data_maker <- function(x,y,z){#sets the function to depend on three inputs, x (a number representing the start year), y (a number representing the end year), and z (representing a string of the name of the team of interest)
 for (i in x:y){ #a for loop iterating over the values of x to y
@@ -225,14 +166,7 @@ ggsave("myplot.png", height =30, width = 10)
 ```
    
    
-4. (10 points) Above and Beyond. Explore the data a bit, and create a graphic that uses (or incorporates) different information than what was used above. Some notes:
-
-   - Create an additional graphic that incorporates at least one additional variable not previously used. The additional data should be drawn from a different dataset (function call) than the original graphic used. These two (or more) datasets may need to be joined appropriately.
-   - You can either add more information to the plot above, or create a different plot. 
-   - Formatting, labelling, etc. are all important here too.
-   - Adding marginal densities or other "bells and whistles" might offer additional insight.
-   - This graphic should be included at the end of the report (after the more detailed explanations). 
-   - You should include a brief description of the graphic (highlighting the different/additional information used).
+4.
 ```{r}
 
 team_names<- c("Atlanta Hawks", "Boston Celtics", "Brooklyn Nets", "Charlotte Hornets", "Chicago Bulls", "Cleveland Cavaliers", "Dallas Mavericks", "Denver Nuggets", "Detroit Pistons", "Golden State Warriors", "Houston Rockets", "Indiana Pacers", "Los Angeles Clippers", "Los Angeles Lakers", "Memphis Grizzlies", "Miami Heat", "Milwaukee Bucks", "Minnesota Timberwolves", "New Orleans Pelicans", "New York Knicks", "Oklahoma City Thunder", "Orlando Magic", "Philadelphia 76ers", "Phoenix Suns", "Portland Trail Blazers", "Sacramento Kings", "San Antonio Spurs", "Toronto Raptors", "Utah Jazz", "Washington Wizards") #list of all team names
@@ -279,17 +213,3 @@ ggplot(shots_attempted_by_player, aes(y = n_shots_attempted)) +#generates a ggpl
   ggtitle("Distribution of Attempted Shots")+#defines title
   coord_flip()#swaps the axis
 ```
-
-
-
-
-## The Deliverables
-
-1. Upload your report and code file(s) to GitHub by 11:59am (noon) on Friday, March 31.
-2. Submit (on Canvas) your report, code, and link to your GitHub repository by 11:59am (noon) on Friday, March 31.
-
-
-
-
-#
-
